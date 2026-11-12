@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" href="data:," />
+  <title>Smile FX · 直播间表情 AR 互动原型</title>
+  <link rel="stylesheet" href="./src/style.css" />
+  <!-- 模型与 wasm 由 main.js 在页面加载时立即后台拉取（与用户阅读说明/点按钮并行），不再额外 preload，避免重复下载 14MB -->
+</head>
+<body>
+  <div id="stage">
+    <video id="cam" playsinline muted autoplay></video>
+    <canvas id="overlay"></canvas>
+    <canvas id="fx"></canvas>
+  </div>
+
+  <!-- 状态徽标：告诉用户当前识别到的表情与触发的特效 -->
+  <div id="badge" class="badge hidden"><span id="badge-dot"></span><span id="badge-text">中性</span></div>
+  <div id="hint" class="hint hidden"></div>
+
+  <pre id="hud" class="hud hidden"></pre>
+
+  <div id="bottom" class="bottom">
+  <!-- 实时信号条：微笑度 / 张嘴度 + 阈值线，方便验收“精准触发” -->
+  <div id="meters" class="meters hidden">
+    <div class="meter"><label>微笑 smile</label><div class="bar"><i id="m-smile"></i><b class="th" id="th-smile"></b></div></div>
+    <div class="meter"><label>张嘴 jaw</label><div class="bar"><i id="m-jaw"></i><b class="th" id="th-jaw"></b></div></div>
+  </div>
+
+  <div id="toolbar" class="toolbar hidden">
+    <button id="btn-debug" title="性能面板 (D)">性能</button>
+    <button id="btn-collider" title="显示头部碰撞体 (C)">碰撞体</button>
+    <button id="btn-recal" title="重新校准 (R)">校准</button>
+    <label class="sens">灵敏度<input id="sens" type="range" min="0.6" max="1.4" step="0.05" value="1" /></label>
+  </div>
+
+  </div>
+
+  <!-- 启动页：iOS Safari 要求用户手势后才能播放视频，同时在这里解释权限用途 -->
+  <section id="intro" class="intro">
+    <div class="card">
+      <h1>Smile FX</h1>
+      <p class="sub">直播间表情 AR 互动原型</p>
+      <ul class="rules">
+        <li><b>微笑</b>（嘴角上扬、闭嘴）→ 屏幕下雨，笑得越开雨越大</li>
+        <li><b>大笑</b>（微笑 + 张嘴）→ 烟花炸开，笑得越大越密集</li>
+        <li>雨滴与烟花粒子会和你的<b>头部</b>发生物理碰撞，试着左右晃头</li>
+      </ul>
+      <button id="btn-start" class="primary">开启摄像头开始体验</button>
+      <button id="btn-demo" class="ghost">没有摄像头？进入演示模式</button>
+      <p class="privacy">画面仅在本机浏览器内实时处理，不上传、不存储。</p>
+      <p id="load-state" class="load-state"></p>
+    </div>
+  </section>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
