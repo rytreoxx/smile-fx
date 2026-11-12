@@ -80,14 +80,18 @@ async function rebuildCPU() {
 async function fetchWithProgress(url) {
   const res = await fetch(url);
   if (!res.ok) throw new Error('HTTP ' + res.status);
+  // 注意：CDN（如 GitHub Pages）会 gzip 压缩传输，此时 content-length 是“压缩后”大小，
+  // 而流里读到的是“解压后”字节。不能按 content-length 预分配缓冲区（会越界），只能用它估算进度。
   const total = +res.headers.get('content-length') || 0;
   if (!res.body || !total) return new Uint8Array(await res.arrayBuffer());
-  const reader = res.body.getReader(); const buf = new Uint8Array(total); let got = 0;
+  const reader = res.body.getReader(); const chunks = []; let got = 0;
   for (;;) {
     const { done, value } = await reader.read(); if (done) break;
-    buf.set(value, got); got += value.length;
-    loadState.textContent = `正在加载人脸模型… ${Math.round((got / total) * 100)}%`;
+    chunks.push(value); got += value.length;
+    loadState.textContent = `正在加载人脸模型… ${Math.min(99, Math.round((got / total) * 100))}%`;
   }
+  const buf = new Uint8Array(got); let o = 0;
+  for (const c of chunks) { buf.set(c, o); o += c.length; }
   return buf;
 }
 
