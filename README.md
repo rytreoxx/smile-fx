@@ -4,8 +4,8 @@
 
 **微笑 → 屏幕下雨；大笑 → 烟花炸开；雨滴与烟花粒子会和你的头部发生物理碰撞。**
 
-- Live Demo：见仓库描述 / 答卷中的链接（需 HTTPS 才能调用摄像头）
-- 加 `?debug` 参数可直接打开性能面板与头部碰撞体可视化，例如 `https://<demo>/?debug`
+- **Live Demo：https://rytreoxx.github.io/smile-fx/** （桌面 / 手机浏览器均可，需允许摄像头）
+- 带性能面板与头部碰撞体可视化：https://rytreoxx.github.io/smile-fx/?debug
 - 没有摄像头 / 拒绝授权时，可进入「演示模式」：鼠标或手指控制“头部”，按住 1 / 2 键（或底部按钮）触发微笑 / 大笑
 
 ## 运行
