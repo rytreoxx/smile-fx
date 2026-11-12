@@ -41,7 +41,7 @@ void main(){
 const FS_LN = `
 precision mediump float;
 varying float v_a;
-void main(){ gl_FragColor = vec4(vec3(0.75, 0.86, 1.0) * v_a, v_a); }`;
+void main(){ gl_FragColor = vec4(vec3(0.80, 0.93, 1.0) * v_a, v_a); }`;
 
 const MAXV = 5000;
 
