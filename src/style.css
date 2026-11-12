@@ -51,7 +51,8 @@ body.demo #stage { background: radial-gradient(ellipse at 50% 40%, #24242c 0%, #
   background: radial-gradient(ellipse at 50% 30%, #1a1a1f 0%, #000 75%); z-index: 10; }
 .card { width: min(420px, 100%); padding: 28px 24px; border-radius: 20px; background: rgba(255,255,255,.06);
   border: 1px solid rgba(255,255,255,.12); text-align: center; }
-.card h1 { font-size: 36px; letter-spacing: 1px; color: #fff; text-shadow: -2px -1px 0 #25F4EE, 2px 1px 0 #FE2C55; }
+.card h1 { font-size: 34px; font-weight: 800; letter-spacing: -.01em; color: #fff; }
+.card h1::after { content: ""; display: block; width: 28px; height: 4px; border-radius: 2px; background: #FE2C55; margin: 12px auto 0; }
 .sub { margin-top: 4px; opacity: .7; font-size: 14px; }
 .rules { list-style: none; margin: 20px 0; text-align: left; display: grid; gap: 10px; font-size: 14px; line-height: 1.55; opacity: .92; }
 .rules li { padding: 10px 12px; border-radius: 10px; background: rgba(255,255,255,.05); }
